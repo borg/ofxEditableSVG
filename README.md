@@ -7,7 +7,7 @@ This extends SVGs with the ability to edit, merge and save out SVGs on both Win,
 
 Update Sep 18, 2016
 
-+Changed name top ofxEditableSVG to prevent naming conflict with core addon
++Changed name from ofxSVG to ofxEditableSVG to prevent naming conflict with core addon
 
 Update Oct 20, 2015
 
