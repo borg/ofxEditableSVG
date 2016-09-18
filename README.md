@@ -1,3 +1,8 @@
+ofxEditableSVG
+==============
+
+![image](https://github.com/borg/ofxEditableSVG/blob/master/ofxaddons_thumbnail.gif)
+
 This extends SVGs with the ability to edit, merge and save out SVGs on both Win, OSX and iOS.
 
 Update Sep 18, 2016
@@ -11,7 +16,7 @@ Licensed under the MIT License,
 http://opensource.org/licenses/mit-license.php
  
  
-Copyright (2015) 
+Copyright (2016) 
 Andreas Borg
 
 http://crea.tion.to
