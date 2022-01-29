@@ -99,13 +99,14 @@ svgtiny_code svgtiny_parse(svgInfo &info,struct svgtiny_diagram *diagram, const 
      Why does this upset the internal SVG parser?
      */
     //parser.setFeature(Poco::XML::XMLReader::FEATURE_NAMESPACES, false);
-
+    ofLog()<<"rawXMLstring "<<rawXMLstring;
     document = parser.parseString(rawXMLstring);
     
-
+   
+    
     svg = document->documentElement();
     
-    
+    ofLog()<<"svg "<<svg;
     
     //std::cout << svg->localName() << std::endl;
     
@@ -359,12 +360,18 @@ svgtiny_code processChildren(svgInfo &info, ofPtr<svgNode> node, Poco::XML::Chil
             
             gDef.fill = ofToString(child->getAttribute("fill").c_str());
             gDef.stroke = ofToString(child->getAttribute("stroke").c_str());
+            ofLog()<<"stroke_width "<<ofToString(child->getAttribute("stroke-width").c_str());
             gDef.stroke_width = ofToString(child->getAttribute("stroke-width").c_str());
             gDef.stroke_miterlimit = ofToString(child->getAttribute("stroke-miterlimit").c_str());
             gDef.fill_opacity = ofToString(child->getAttribute("fill-opacity").c_str());
             gDef.stroke_opacity = ofToString(child->getAttribute("stroke-opacity").c_str());
-            
-            
+           
+            ofLog()<<"id "<<ofToString(child->getAttribute("id").c_str());
+            gDef.id = ofToString(child->getAttribute("id").c_str());
+            ofLog()<<"inkscape_groupmode "<<ofToString(child->getAttribute("inkscape-groupmode").c_str());
+            gDef.inkscape_groupmode = ofToString(child->getAttribute("inkscape-groupmode").c_str());
+            ofLog()<<"inkscape_label "<<ofToString(child->getAttribute("inkscape-label").c_str());
+            gDef.inkscape_label = ofToString(child->getAttribute("inkscape-label").c_str());
             
             
             //recursive call for any nodes inside svg
