@@ -5,13 +5,18 @@ ofxEditableSVG
 
 This extends SVGs with the ability to edit, merge and save out SVGs on both Win, OSX and iOS.
 
+Update Jan 28, 2022
+
+- added a small fix to properly add `id` attribute to `<g>` group
+- added an example for custom attributes
+
 Update Sep 18, 2016
 
-+Changed name from ofxSVG to ofxEditableSVG to prevent naming conflict with core addon
+- Changed name from ofxSVG to ofxEditableSVG to prevent naming conflict with core addon
 
 Update Oct 20, 2015
 
-+Added rudimentary support for base64 images to be embedded in output SVG. No parsing or rendering yet though. Feel free to help out there. Current purpose was just to be able to embed pixel/font generated content in output SVG. 
+- Added rudimentary support for base64 images to be embedded in output SVG. No parsing or rendering yet though. Feel free to help out there. Current purpose was just to be able to embed pixel/font generated content in output SVG. 
 
 
 Licensed under the MIT License,

@@ -1,11 +1,22 @@
 #include "ofApp.h"
 
+ofPath myPath;
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-    svg1.load("gordon.svg");
-    svg2.load("monkey.svg");
+//    svg1.load("gordon.svg");
+//    svg2.load("monkey.svg");
     ofEnableSmoothing();
+    
+    myPath.moveTo(ofGetWidth()/2,ofGetHeight()/2);
+    myPath.lineTo(10, 10);
+    myPath.lineTo(10, 100);
+    myPath.lineTo(100, 100);
+    
+    
+    myPath.setStrokeColor(ofColor(0));
+    myPath.setStrokeWidth(1);
+    myPath.setFilled(false);
 }
 
 //--------------------------------------------------------------
@@ -15,13 +26,18 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    svg1.draw();
-    svg2.draw();
+//    svg1.draw();
+//    svg2.draw();
+    
+    ofSetColor(0);
+    myPath.draw();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
+
+    /*
     if(key=='s'){
         svg1.save("svg1_"+ofToString(ofGetTimestampString())+".svg");
         svg2.save("svg2_"+ofToString(ofGetTimestampString())+".svg");
@@ -30,9 +46,9 @@ void ofApp::keyPressed(int key){
     
     if(key=='m'){
     
-    /*
-     Group all svgs together and save out without modifying originals
-     */
+    
+   //  Group all svgs together and save out without modifying originals
+   
     ofxEditableSVGRef totSVG(new ofxEditableSVG());
     
     
@@ -49,17 +65,21 @@ void ofApp::keyPressed(int key){
 
     
     }
-    
+    */
     
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-
+    if(key == 'a'){
+        svg1.addPath(myPath);
+        svg1.save("svg1_"+ofToString(ofGetTimestampString())+".svg"); 
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
+    /*
     float sx = (float)x/(float)ofGetWidth();
     float sy = (float)y/(float)ofGetHeight();
     
@@ -71,6 +91,7 @@ void ofApp::mouseMoved(int x, int y ){
     svg2.setStrokeColor(col);
     
     svg2.setStrokeWidth(sy*5);
+     */
 }
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){

@@ -95,7 +95,7 @@ void ofxEditableSVG::parseXML(string xml){
     
     
     struct svgtiny_diagram * diagram = svgtiny_create();
-    
+    ofLog()<<"parseXML "<<xml;
 	svgtiny_code code = svgtiny_parse(info,diagram, xml.c_str(), 0, 0);
     //svgtiny_parse(diagram, buffer.getText().c_str(), size, path.c_str(), 0, 0);
     
@@ -129,6 +129,8 @@ void ofxEditableSVG::parseXML(string xml){
 		}
 		fprintf(stderr, "\n");
 	}
+    
+    ofLog()<<"diagram "<<diagram;
     
 	setupDiagram(diagram);
     
@@ -667,8 +669,10 @@ void ofxEditableSVG::embedImage(ofPixelsRef &pix, int _x, int _y, int w, int h, 
  void ofPath::quadBezierTo(const ofPoint & cp1, const ofPoint & cp2, const ofPoint & p)
  */
 
-
 void ofxEditableSVG::addPath(ofPath &path,bool inNewGroup){
+    addPath(path,inNewGroup,"");
+}
+void ofxEditableSVG::addPath(ofPath &path,bool inNewGroup, string _groupName){
     
     string rawXMLstring =  toString();
     
@@ -706,8 +710,12 @@ void ofxEditableSVG::addPath(ofPath &path,bool inNewGroup){
     Element *root = (Element *) cnl->item(0);
     
     if(inNewGroup){
+        ofLog()<<"inNewGroup id ";
         Element *groupElement = document->createElement("g");
+        groupElement->setAttribute("inkscape-groupmode","layer");
         groupElement->setAttribute("id",ofGetTimestampString());
+//        groupElement->setAttribute("stroke-width","0.123");
+        groupElement->setAttribute("inkscape-label",_groupName);
         groupElement->appendChild(pathElement);
         root->appendChild(groupElement);
     }else{
@@ -721,7 +729,7 @@ void ofxEditableSVG::addPath(ofPath &path,bool inNewGroup){
     writer.setOptions(XMLWriter::PRETTY_PRINT);
     writer.writeNode(xmlstream, document);
     
-    
+    cout<<"xmlstream.str() "<<xmlstream.str();
 
     parseXML(xmlstream.str());
     
@@ -774,7 +782,7 @@ void ofxEditableSVG::addPaths(vector<ofPath> &paths,bool inNewGroup){
     writer.writeNode(xmlstream, document);
     
     
-    
+//    cout<<"xmlstream.str() "<<xmlstream.str();
     parseXML(xmlstream.str());
 };
 
@@ -1008,6 +1016,7 @@ void ofxEditableSVG::setViewbox(int x, int y,int w, int h){
     info.x = ofToString(x) +"px";
     info.width = ofToString(w) +"px";
     info.height = ofToString(h) +"px";
+    ofLog()<<"setViewbox() "<<info.width;
 };
 
 void ofxEditableSVG::save(string file){
@@ -1441,6 +1450,15 @@ Element * ofxEditableSVG::parseNode(Document *doc,ofPtr<svgNode> node){
             }
             if(!node->group.stroke_opacity.empty()){
                 newNode->setAttribute("stroke-opacity",node->group.stroke_opacity);
+            }
+            if(!node->group.id.empty()){
+                newNode->setAttribute("id",node->group.id);
+            }
+            if(!node->group.inkscape_label.empty()){
+                newNode->setAttribute("inkscape-label",node->group.inkscape_label);
+            }
+            if(!node->group.inkscape_groupmode.empty()){
+                newNode->setAttribute("inkscape-groupmode",node->group.inkscape_groupmode);
             }
             break;
         case SVG_TAG_TYPE_SVG:

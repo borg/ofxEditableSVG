@@ -78,7 +78,11 @@ typedef struct svgGroupDef {
     string stroke_width;
     string stroke_miterlimit;
     string fill_opacity;//float 0-1
-    string stroke_opacity;//float 0-1    
+    string stroke_opacity;//float 0-1  
+    
+    string id;
+    string inkscape_groupmode;
+    string inkscape_label;
     // string rawXML;
 }svgGroupDef;
 
